@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mctApp.mobileUser.home.title">Mobile Users</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-mobile-user" [routerLink]="['/mobile-user/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="mctApp.mobileUser.home.createLabel">
+            Create a new Mobile User
+            </span>
+        </button>
+    </h2>
+
+    <mct-alert-error></mct-alert-error>
+
+    <mct-alert></mct-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="mobileUsers?.length === 0">
+        <span jhiTranslate="mctApp.mobileUser.home.notFound">No mobileUsers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="mobileUsers && mobileUsers.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mobileNumber"><span jhiTranslate="mctApp.mobileUser.mobileNumber">Mobile Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="firstName"><span jhiTranslate="mctApp.mobileUser.firstName">First Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastName"><span jhiTranslate="mctApp.mobileUser.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateOfBirth"><span jhiTranslate="mctApp.mobileUser.dateOfBirth">Date Of Birth</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gender"><span jhiTranslate="mctApp.mobileUser.gender">Gender</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="mctApp.mobileUser.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mobileUser of mobileUsers ;trackBy: trackId">
+                    <td><a [routerLink]="['/mobile-user', mobileUser.id, 'view']">{{ mobileUser.id }}</a></td>
+                    <td>{{ mobileUser.mobileNumber }}</td>
+                    <td>{{ mobileUser.firstName }}</td>
+                    <td>{{ mobileUser.lastName }}</td>
+                    <td>{{ mobileUser.dateOfBirth | date:'mediumDate' }}</td>
+                    <td jhiTranslate="{{ 'mctApp.Gender.' + mobileUser.gender }}">{{ mobileUser.gender }}</td>
+                    <td>{{ mobileUser.email }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/mobile-user', mobileUser.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/mobile-user', mobileUser.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(mobileUser)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="mobileUsers && mobileUsers.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

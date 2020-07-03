@@ -1,0 +1,52 @@
+{
+  "name": "MobileUser",
+  "fields": [
+    {
+      "fieldName": "mobileNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required", "pattern"],
+      "fieldValidateRulesPattern": "^(\\+62|62|0){1}[8]{1}\\d{8,10}$"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "dateOfBirth",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Gender",
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required", "maxlength", "minlength", "pattern"],
+      "fieldValidateRulesMaxlength": "254",
+      "fieldValidateRulesMinlength": "5",
+      "fieldValidateRulesPattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200702133259",
+  "entityTableName": "mobile_user",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["mct"]
+}

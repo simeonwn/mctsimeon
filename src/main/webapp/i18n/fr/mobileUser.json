@@ -1,0 +1,27 @@
+{
+  "mctApp": {
+    "mobileUser": {
+      "home": {
+        "title": "MobileUsers",
+        "createLabel": "Créer un nouveau Mobile User",
+        "createOrEditLabel": "Créer ou éditer un Mobile User",
+        "notFound": "Aucun Mobile User trouvé"
+      },
+      "created": "Un nouveau Mobile User a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Mobile User avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Mobile User avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Mobile User {{ id }} ?"
+      },
+      "detail": {
+        "title": "Mobile User"
+      },
+      "mobileNumber": "Mobile Number",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "dateOfBirth": "Date Of Birth",
+      "gender": "Gender",
+      "email": "Email"
+    }
+  }
+}

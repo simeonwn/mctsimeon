@@ -1,0 +1,32 @@
+application {
+  config {
+    baseName mct
+	jhiPrefix mct
+	packageName app.mct
+    applicationType monolith
+    prodDatabaseType postgresql
+    buildTool gradle
+    testFrameworks [protractor]
+	cacheProvider caffeine
+	useSass true
+  }
+  entities *
+}
+
+entity MobileUser{
+	mobileNumber String unique required pattern(/^(\+62|62|0){1}[8]{1}\d{8,10}$/)
+	firstName String required maxlength(50)
+	lastName String required maxlength(50)
+	dateOfBirth LocalDate
+	gender Gender
+	email String unique required maxlength(254) minlength(5) pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+}
+
+enum Gender {
+    MALE, FEMALE
+}
+
+dto * with mapstruct
+service * with serviceImpl
+filter *
+paginate * with pagination
